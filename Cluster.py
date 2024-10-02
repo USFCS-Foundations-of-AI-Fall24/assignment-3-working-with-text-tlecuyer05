@@ -19,7 +19,10 @@ class Cluster :
 
     ## You do this.
     def calculate_centroid(self):
-        pass
+        for doc in self.members:
+            self.centroid.add_tokens(doc.tokens)
+        for token in self.centroid.tokens:
+            self.centroid.tokens[token] = self.centroid.tokens[token]/len(self.members)
 
 
 # Call like so: k_means(2, ['pos','neg'], positive_docs + negative_docs)
