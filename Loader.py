@@ -55,7 +55,21 @@ def convert_to_lowercase(token) :
 def compute_homogeneity(list_of_clusters, list_of_classes) :
     # hlist will be the homogeneity for each cluster.
     hlist = []
+    for cluster in list_of_clusters:
+        counts = [0] * len(list_of_classes)
 
+        for doc in cluster.members:
+            for i in range(len(list_of_classes)):
+                if doc.true_class == list_of_classes[i]:
+                    counts[i] += 1
+
+        maxIdx = max(counts)
+        totalDocs = len(cluster.members)
+        if totalDocs > 0:
+            homogeneity = maxIdx / totalDocs
+        else:
+            homogeneity = 0
+        hlist.append(homogeneity)
     return hlist
 
 ## completeness: for the dominant class in each cluster, what fraction
@@ -67,6 +81,31 @@ def compute_homogeneity(list_of_clusters, list_of_classes) :
 def compute_completeness(list_of_clusters, list_of_classes):
     # clist will be the homogeneity for each cluster.
     clist = []
+    # Get the total counts of each class for every cluster
+    total_counts = [0] * len(list_of_classes)
+    for cluster in list_of_clusters:
+        for doc in cluster.members:
+            for i in range(len(list_of_classes)):
+                if doc.true_class == list_of_classes[i]:
+                    total_counts[i] += 1
+
+    # Calculate the completeness for each cluster
+    for cluster in list_of_clusters:
+        counts = [0] * len(list_of_classes)
+        for doc in cluster.members:
+            for i in range(len(list_of_classes)):
+                if doc.true_class == list_of_classes[i]:
+                    counts[i] += 1
+
+        majority_class_idx = counts.index(max(counts))
+        majority_class = counts[majority_class_idx]
+        total_majority_class = total_counts[majority_class_idx]
+        if total_majority_class > 0:
+            completeness_score = majority_class / total_majority_class
+        else:
+            completeness_score = 0
+
+        clist.append(completeness_score)
 
     return clist
 

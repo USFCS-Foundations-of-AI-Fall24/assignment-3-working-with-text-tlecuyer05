@@ -20,5 +20,11 @@ class Test(TestCase):
                                               filters=[],
                                               transforms=[])
 
+        result = k_means(2, ['pos', 'neg'], positive_docs + negative_docs)
+        res2 = compute_homogeneity(result, ['pos','neg'])
+        print("Homogeinity", res2)
+        res3 = compute_completeness(result, ['pos', 'neg'])
+        print("Completeness", res3)
+
 
 
