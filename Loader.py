@@ -29,7 +29,7 @@ def create_easy_documents(list_of_docs, true_class, filters=None, transforms=Non
 
 # you do this.
 def not_stopword(token) :
-    pass
+    return True
 
 def not_cat(token) :
     return token is not 'cat'
@@ -39,6 +39,7 @@ def not_cat(token) :
 
 # you do this.
 def remove_trailing_punct(token) :
+    return token.rstrip(string.punctuation)
     pass
 
 # and this
@@ -63,7 +64,7 @@ def compute_homogeneity(list_of_clusters, list_of_classes) :
 # result = k_means(2, ['pos','neg'], positive_docs + negative_docs)
 # compute_completeness(result, ['pos','neg'])
 
-def compute_completeness(list_of_clusters, list_of_classes)
+def compute_completeness(list_of_clusters, list_of_classes):
     # clist will be the homogeneity for each cluster.
     clist = []
 

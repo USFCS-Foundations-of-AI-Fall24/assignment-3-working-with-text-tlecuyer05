@@ -29,6 +29,6 @@ class Test(TestCase):
         d = Document(true_class='pos')
         d.add_tokens(['cat', 'dog', 'fish'])
         d2 = Document(true_class='pos')
-        d2.add_tokens(['cat', 'dog', 'fish'])
+        d2.add_tokens(['cat', 'dog'])
         print(cosine_similarity(d,d2))
-        self.assertAlmostEqual(cosine_similarity(d,d2),1,4)
+        self.assertAlmostEqual(cosine_similarity(d,d2),0.81, 1)

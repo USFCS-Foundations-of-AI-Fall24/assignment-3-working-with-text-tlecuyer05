@@ -11,7 +11,7 @@ def chapter1(file_path):
 def chapter2(file_path):
     cancer_data = pd.read_csv(file_path, names=['class', 'age', 'menopause', 'tumor-size', 'inv-nodes', 'node-caps',
                                                 'deg-malig', 'breast', 'breast-quad', 'irradiat'])
-    print("The most common classficiation is: ",cancer_data['class'].value_counts().idxmax())
+    print("The most common classficiation is:",cancer_data['class'].value_counts().idxmax())
 
 #Question 3 implementation
 def chapter3(file_path):
