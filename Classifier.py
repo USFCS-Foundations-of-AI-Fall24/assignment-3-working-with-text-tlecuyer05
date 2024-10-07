@@ -20,10 +20,10 @@ def five_fold_cross_validation(nwords, nelements):
     ## generate nelements documents of each type (pos and neg), with nwords words in each doc.
     for _ in range(nelements):
         pos_reviews, neg_reviews = create_docs(nelements, nelements)
-        positive_docs = create_easy_documents([pos_reviews], 'pos',
+        positive_docs = create_easy_documents(pos_reviews, 'pos',
                                             filters=[not_stopword],
                                             transforms=[convert_to_lowercase, remove_trailing_punct])
-        negative_docs = create_easy_documents([neg_reviews], 'neg',
+        negative_docs = create_easy_documents(neg_reviews, 'neg',
                                             filters=[not_stopword],
                                             transforms=[convert_to_lowercase, remove_trailing_punct])
         all_docs.append(positive_docs[0])
