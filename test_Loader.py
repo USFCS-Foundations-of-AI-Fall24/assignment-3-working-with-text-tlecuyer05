@@ -4,10 +4,31 @@ from Loader import *
 
 class Test(TestCase):
     def test_apply_filters(self):
-        pass
+        tokens1 = ['a', 'cat', 'is']
+        filtered1 = []
+        for token in tokens1:
+            if not_cat(token):
+                filtered1.append(token)
+        tokens2 = ['a', 'cat', 'is']
+        filtered2 = []
+        for token in tokens2:
+            if not_stopword(token):
+                filtered2.append(token)
+        self.assertEqual(filtered1, ['a', 'is'])
+        self.assertEqual(filtered2, ['cat', 'is'])
 
     def test_apply_transforms(self):
-        pass
+        tokens1 = ['a.', 'cat.', 'is.']
+        filtered1 = []
+        for token in tokens1:
+            filtered1.append(remove_trailing_punct(token))
+        tokens2 = ['A', 'CAT', 'IS']
+        filtered2 = []
+        for token in tokens2:
+            if not_stopword(token):
+                filtered2.append(convert_to_lowercase(token))
+        self.assertEqual(filtered1, ['a', 'cat', 'is'])
+        self.assertEqual(filtered2, ['a', 'cat', 'is'])
 
     def test_workflow(self):
         pos_reviews, neg_reviews = create_docs(10, 10)

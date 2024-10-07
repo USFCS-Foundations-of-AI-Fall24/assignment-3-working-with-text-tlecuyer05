@@ -20,7 +20,8 @@ def create_easy_documents(list_of_docs, true_class, filters=None, transforms=Non
             words = [word for word in words if f(word)]
 
         ## deal with transforms here
-
+        for t in transforms:
+            words = [t(word) for word in words]
         d.add_tokens(words)
         document_list.append(d)
     return document_list
@@ -29,10 +30,10 @@ def create_easy_documents(list_of_docs, true_class, filters=None, transforms=Non
 
 # you do this.
 def not_stopword(token) :
-    return True
+    return token not in ['a', 'an', 'the']
 
 def not_cat(token) :
-    return token is not 'cat'
+    return token != 'cat'
 
 
 # transforms - convert a token into a new format
@@ -40,11 +41,10 @@ def not_cat(token) :
 # you do this.
 def remove_trailing_punct(token) :
     return token.rstrip(string.punctuation)
-    pass
 
 # and this
 def convert_to_lowercase(token) :
-    pass
+    return token.lower()
 
 
 
